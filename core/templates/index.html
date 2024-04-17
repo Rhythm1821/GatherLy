@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if not user.is_authenticated %}
+<!-- Chat Rooms Section -->
+<section class="container py-5">
+    <h2 class="text-center mb-4">Chat Rooms</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Room 1</h5>
+                    <p class="card-text">Join Room 1 for general discussions.</p>
+                    <a href="#" class="btn btn-primary">Join</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Room 2</h5>
+                    <p class="card-text">Join Room 2 for specific topic discussions.</p>
+                    <a href="#" class="btn btn-primary">Join</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Room 3</h5>
+                    <p class="card-text">Join Room 3 for casual chats.</p>
+                    <a href="#" class="btn btn-primary">Join</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+{% else %}
+<h1>You rooms appear here</h1>
+{% endif %}
+{% endblock %}
