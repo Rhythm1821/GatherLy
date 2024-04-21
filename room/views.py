@@ -28,7 +28,6 @@ def room(request,room_id):
 @login_required
 def delete_room(request,room_id):
     room=Room.objects.get(id=room_id)
-    print(room)
     if request.user.username==room.created_by.username:
         room.delete()
         messages.success(request,'Room deleted successfully')
@@ -40,25 +39,21 @@ def delete_room(request,room_id):
 @login_required    
 def search(request):
     if request.method=='POST':
-        search = request.POST['search']
-        rooms = Room.objects.filter(name__contains=search)
-        return render(request,'search.html',{"rooms":rooms,"search":search})
+        if request.POST.get('search'):
+            search = request.POST['search']
+            rooms = Room.objects.filter(name__contains=search)
+            return render(request,'search.html',{"rooms":rooms,"search":search})
+        else:
+            room_name=request.POST.get('room_name')
+            uuid = request.POST.get('uuid')
+            room = Room.objects.get(name=room_name)
+            print("Checking UUID")
+            if str(room.id)==uuid:
+                print("UUID Matched")
+                room.members.add(request.user)
+                print("Member added successfully")
+                return render(request,'room.html',{'room':room})
     return render(request,'search.html')
-
-
-@login_required
-def join_room(request, room_name, room_id):
-    try:
-        original_room = Room.objects.get(id=room_id)
-    except Room.DoesNotExist:
-        return redirect('home')
-
-    if original_room.name != room_name:
-        return redirect('home')
-    
-    original_room.members.add(request.user)
-    room=Room.objects.get(id=room_id)
-    return render(request,'room.html',{'room':room})
 
 
 @login_required

@@ -6,7 +6,7 @@
     {% csrf_token %}
     <input type="text" placeholder="Search Room" name="search" class="form-control">
     <br>
-    <button type="submit" class="btn btn-secondary">Search tweet</button>
+    <button type="submit" class="btn btn-secondary">Search Rooms</button>
 </form>
 <br>
 
@@ -37,11 +37,14 @@
                     {% if request.user in room.members.all %}
                     <a href="{% url 'room:room' room.id %}" class="btn btn-primary">Join</a>
                     {% else %}
-                    <button onclick="promptUUID('{{ room.id }}')" class="btn btn-primary">Join</button>
-                    <div id="uuid-input-{{ room.id }}" class="mt-2" style="display:none;">
-                        <input type="text" class="form-control mb-2" placeholder="Enter UUID to join">
-                        <a href="{% url 'room:join-room' room.name room.id %}" class="btn btn-success">Submit UUID</a>
-                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="room_name" value="{{ room.name }}"> 
+                        <div class="mt-2" style="display:block;">
+                            <input type="text" name="uuid" class="form-control mb-2" placeholder="Enter UUID to join">
+                            <button class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
                     {% endif %}
                 </div>
             </div>
@@ -54,10 +57,5 @@
 
 {% block scripts %}
 <script>
-function promptUUID(roomId) {
-    let inputDiv = document.getElementById('uuid-input-' + roomId);
-    inputDiv.style.display = inputDiv.style.display === 'none' ? 'block' : 'none';
-}
-
 </script>
 {% endblock %}

@@ -11,10 +11,12 @@
                 </div>
                 <div class="card-body pt-4 pl-4 pr-4"> <!-- Added padding classes here -->
                     {% for m in members %}
+                    {% if m != request.user %}
                     <div class="member mb-2 d-flex justify-content-between align-items-center">
                         <span>{{ m }}</span>
                         <a type="submit" class="btn btn-sm btn-danger delete-member">Delete</a>
                     </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
@@ -23,14 +25,19 @@
 </div>
 {% endblock %}
 
-{% block script %}
+{% block scripts %}
 
 <script>
-    const deleteMember = document.querySelector('.delete-member')
-
+    const deleteMember = document.querySelector('.delete-member');
     deleteMember.addEventListener('click', function(e) {
         if (!confirm('Are you sure you want to delete this member?')) {
             e.preventDefault()
+            let memberContainer = e.target.closest('.member');
+            console.log("Not removed yet");
+            if (memberContainer) {
+                memberContainer.remove();
+                console.log("removed");
+            }
         }
     })
 </script>
