@@ -37,14 +37,17 @@
                     {% if request.user in room.members.all %}
                     <a href="{% url 'room:room' room.id %}" class="btn btn-primary">Join</a>
                     {% else %}
-                    <form method="post">
+                    <form method="post" id="joinRoomForm">
                         {% csrf_token %}
                         <input type="hidden" name="room_name" value="{{ room.name }}"> 
                         <div class="mt-2" style="display:block;">
                             <input type="text" name="uuid" class="form-control mb-2" placeholder="Enter UUID to join">
-                            <button class="btn btn-success">Submit</button>
+                            <button class="btn btn-success" type="button" id="submitButton">Submit</button>
                         </div>
+                        <p class="text-danger" id="errorMessage"></p>
                     </form>
+                    
+                    
                     {% endif %}
                 </div>
             </div>
@@ -57,5 +60,31 @@
 
 {% block scripts %}
 <script>
+    $(document).ready(function() {
+        $("#submitButton").click(function() {
+            var formData = {
+                'room_name': $('input[name=room_name]').val(),
+                'uuid': $('input[name=uuid]').val(),
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "room:search" %}',  // Make sure you have named your URL in Django's urls.py
+                data: formData,
+                success: function(data) {
+                    if (data.error) {
+                        $("#errorMessage").text(data.error);
+                    } else {
+                        // Redirect to another page or update the DOM as needed
+                        window.location.href = "/room/" + data.room_id;  // Change URL as required
+                    }
+                },
+                error: function() {
+                    $("#errorMessage").text("Invalid UUID.");
+                }
+            });
+        });
+    });
 </script>
 {% endblock %}

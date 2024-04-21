@@ -35,6 +35,7 @@ def delete_room(request,room_id):
     else:
         PermissionDenied('You do not have permission to delete this room')
         return redirect('home')
+from django.http import JsonResponse
     
 @login_required    
 def search(request):
@@ -44,15 +45,19 @@ def search(request):
             rooms = Room.objects.filter(name__contains=search)
             return render(request,'search.html',{"rooms":rooms,"search":search})
         else:
-            room_name=request.POST.get('room_name')
+            room_name = request.POST.get('room_name')
             uuid = request.POST.get('uuid')
-            room = Room.objects.get(name=room_name)
-            print("Checking UUID")
-            if str(room.id)==uuid:
-                print("UUID Matched")
-                room.members.add(request.user)
-                print("Member added successfully")
-                return render(request,'room.html',{'room':room})
+            if room_name and uuid:
+                try:
+                    room = Room.objects.get(name=room_name)
+                    if str(room.id) == uuid:
+                        room.members.add(request.user)
+                        return JsonResponse({'room_id': room.id})
+                    else:
+                        return JsonResponse({'error': 'Invalid UUID provided.'}, status=400)
+                except Room.DoesNotExist:
+                    return JsonResponse({'error': 'Room not found.'}, status=404)
+            return JsonResponse({'error': 'Required fields are missing.'}, status=400)
     return render(request,'search.html')
 
 
