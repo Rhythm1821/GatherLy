@@ -1,8 +1,12 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
 from .forms import RegisterForm
+from room.models import Room
 
 def index(request):
+    if request.user.is_authenticated:
+        rooms = request.user.joined_rooms.all()  # Room.objects.filter(members=request.user) both works
+        return render(request, 'index.html',{'rooms':rooms})
     return render(request, 'index.html')
 
 def about(request):
