@@ -3,18 +3,18 @@
 {% block content %}
 <br>
 <div class="container">
-    <div class="row justify-content-center"> <!-- Center the card horizontally -->
-        <div class="col-md-8"> <!-- Specify the desired width (medium screen size) -->
+    <div class="row justify-content-center"> 
+        <div class="col-md-8"> 
             <div class="card">
                 <div class="card-header bg-primary text-white">
                     Members
                 </div>
-                <div class="card-body pt-4 pl-4 pr-4"> <!-- Added padding classes here -->
+                <div class="card-body pt-4 pl-4 pr-4">
                     {% for m in members %}
                     {% if m != request.user %}
                     <div class="member mb-2 d-flex justify-content-between align-items-center">
                         <span>{{ m }}</span>
-                        <a type="submit" class="btn btn-sm btn-danger delete-member">Delete</a>
+                        <a href="{% url 'room:delete-member' room.id m.id %}" type="submit" class="btn btn-sm btn-danger delete-member">Delete</a>
                     </div>
                     {% endif %}
                     {% endfor %}

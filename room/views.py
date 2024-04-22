@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 from .models import Room
 from .forms import RoomForm
@@ -23,6 +24,8 @@ def create_room(request):
 @login_required    
 def room(request,room_id):
     room=Room.objects.get(id=room_id)
+    if request.user not in room.members.all():
+        raise PermissionDenied('You do not have permission to access this room')
     return render(request,'room.html',{'room':room})
 
 @login_required
@@ -62,9 +65,15 @@ def search(request):
 
 
 @login_required
-def delete_member(request,room_id):
+def delete_member(request,room_id,member_id):
     room = Room.objects.get(id=room_id)
-    pass
+    if request.user.username == room.created_by.username:
+        room.members.remove(User.objects.get(id=member_id))
+        messages.success(request,'Member removed successfully')
+        return redirect(request.META['HTTP_REFERER'])
+    messages.error(request,'You do not have permission to delete this member')
+    return redirect(request.META['HTTP_REFERER'])
+
 
 @login_required
 def all_members(request,room_id):
