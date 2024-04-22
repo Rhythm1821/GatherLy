@@ -5,10 +5,14 @@ Register
 {% endblock %}
 
 {% block content %}
+{% if not request.user.is_authenticated %}
 <h1>Register</h1>
 <form action="" method="post">
 {% csrf_token %}
 {{ form.as_p }}
 <button type="submit">Register</button>
 </form>
+{% else %}
+<h1>You're already registered!!</h1>
+{% endif %}
 {% endblock %}
