@@ -23,13 +23,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
         room_id = text_data_json['room_id']
         username = text_data_json['username']
         message = text_data_json['message']
+        if message  and message.strip():
+            await self.create_message(room_id,username,message)
+            print("Message saved")
 
-        await self.create_message(room_id,username,message)
-        print("Message saved")
-
-        await self.channel_layer.group_send(
-            self.room_group_name, {'type': 'chat.message', 'message': message, 'username': username}
-        )
+            await self.channel_layer.group_send(
+                self.room_group_name, {'type': 'chat.message', 'message': message, 'username': username}
+            )
+        else:
+            print("Message empty not saving")
     
     async def disconnect(self, code):
         await self.channel_layer.group_discard(
