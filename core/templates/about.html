@@ -1,9 +1,50 @@
 {% extends 'base.html' %}
 
 {% block title %}
-About
+About Us
 {% endblock %}
 
 {% block content %}
-<h1 class="text-center mb-4">About Page</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">About Us</h1>
+    
+    <div class="mb-4">
+        <h2>Welcome to GatherLy</h2>
+        <p>
+            At GatherLy, we believe in the power of communication and connection. Our real-time chat application provides a seamless platform for users to interact, share ideas, and build communities. Whether you're looking to connect with friends, collaborate with colleagues, or establish a new chat room, GatherLy is here to make your experience smooth, secure, and instantaneous.
+        </p>
+    </div>
+
+    <div class="mb-4">
+        <h2>Our Vision</h2>
+        <p>
+            We aim to create a world where communication is effortless and immediate. By leveraging cutting-edge technology, GatherLy bridges the gap between people, making conversations happen in real time, no matter where you are.
+        </p>
+    </div>
+
+    <div class="mb-4">
+        <h2>What We Offer</h2>
+        <ul>
+            <li><strong>User Authentication:</strong> Security is our priority. GatherLy offers robust user authentication, ensuring that your chats remain private and secure.</li>
+            <li><strong>Dynamic Chat Rooms:</strong> Create and join chat rooms effortlessly. Each room has a unique identifier (UUID), making it easy to invite others and organize conversations around specific topics or interests.</li>
+            <li><strong>Real-time Messaging:</strong> Experience the future of communication with our real-time messaging feature. Thanks to WebSocket technology, your messages are sent and received instantly, ensuring that your conversations flow naturally.</li>
+            <li><strong>Admin Controls:</strong> GatherLy empowers admins with the tools they need to manage chat rooms effectively. Admins can delete rooms, remove users, and maintain a safe and respectful environment for all participants.</li>
+            <li><strong>Responsive Design:</strong> Communication on the go has never been easier. Our application is designed to be fully responsive, providing an optimal experience on both desktop and mobile devices.</li>
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h2>Technologies Behind GatherLy</h2>
+        <ul>
+            <li><strong>Django:</strong> The backbone of our application, Django, is a powerful web framework that allows us to build a secure and scalable backend, managing everything from user authentication to data storage.</li>
+            <li><strong>Django Channels:</strong> This is what makes our real-time messaging possible. Django Channels handle WebSocket connections, allowing us to deliver messages instantly and efficiently.</li>
+            <li><strong>HTML/CSS/JavaScript:</strong> Our intuitive and user-friendly interface is crafted using these essential frontend technologies, ensuring that your experience with GatherLy is as smooth as possible.</li>
+            <li><strong>SQLite:</strong> All user data and chat information are securely stored in our SQLite database, providing reliable and fast access whenever you need it.</li>
+        </ul>
+    </div>
+
+    <div class="text-center mb-4">
+        <p>Enjoy :)</p>
+    </div>
+</div>
 {% endblock %}

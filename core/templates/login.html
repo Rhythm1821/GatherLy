@@ -1,40 +1,44 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Login
-{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-
 {% if not request.user.is_authenticated %}
-<div class="p-10 lg:p-20 text-center">
-    <h1 class="">Log In</h1>
-</div>
-
-<form action="." method="post" class="">
-    {% csrf_token %}
-    <div class="mb-5">
-        <label class="">Username</label>
-        <input type="text" name="username" class="">
-    </div>
-    <div class="mb-5">
-        <label class="text-white">Password</label>
-        <input type="text" name="password" class="">
-    </div>
-
-    {% if form.errors %}
-        {% for field in form %}
-            {% for error in field.errors  %}
-                <div class="">
-                    <p>{{ error|escape }}</p>
+<div class="container-fluid bg-dark text-light min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="card bg-secondary text-dark" style="max-width: 400px;">
+        <div class="card-header bg-dark text-light text-center">
+            <h2 class="card-title">LOGIN</h2>
+        </div>
+        <div class="card-body">
+            <form action="." method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control bg-dark text-light" id="username" name="username" required>
                 </div>
-            {% endfor %}
-        {% endfor %}
-    {% endif %}
-    <button class="">Submit</button>
-</form>
-
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control bg-dark text-light" id="password" name="password" required>
+                </div>
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error|escape }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-light">Log in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% else %}
-<h1>You're already logged in!!</h1>
+<div class="container-fluid bg-dark text-light min-vh-100 d-flex align-items-center justify-content-center">
+    <h1>You're already logged in!</h1>
+</div>
 {% endif %}
 {% endblock %}
