@@ -25,7 +25,8 @@ def create_room(request):
 def room(request,room_id):
     room=Room.objects.get(id=room_id)
     if request.user not in room.members.all():
-        raise PermissionDenied('You do not have permission to access this room')
+        messages.error(request,'You are not a member of this room')
+        return redirect('home')
     return render(request,'room.html',{'room':room})
 
 @login_required

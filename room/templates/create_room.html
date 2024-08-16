@@ -3,10 +3,29 @@
 {% block title %}Create Room{% endblock %}
 
 {% block content %}
-<h1>Create Room</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-<button type="submit">Create</button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-dark text-white shadow-lg p-4 rounded">
+                <div class="card-body">
+                    <h1 class="card-title text-center mb-4">Create Room</h1>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{ form.name.label_tag }}
+                            {{ form.name }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.description.label_tag }}
+                            {{ form.description }}
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

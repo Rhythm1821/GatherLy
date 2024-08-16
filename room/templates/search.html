@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Search Room</h1>
-<form action="" method="post">
+<h1 class="text-center mb-4">Search Room</h1>
+<form action="" method="post" class="d-flex justify-content-center gap-2">
     {% csrf_token %}
-    <input type="text" placeholder="Search Room" name="search" class="form-control">
+    <input type="text" placeholder="Search Room" name="search" class="form-control w-25">
     <br>
     <button type="submit" class="btn btn-secondary">Search Rooms</button>
 </form>
