@@ -36,6 +36,11 @@ This is a real-time chat application built using Django and Django Channels. Use
     pip install -r requirements.txt
     ```
 
+4. Make migrations to set up the database:
+    ```
+    python3 manage.py makemigrations
+    ```
+
 4. Run migrations to set up the database:
     ```
     python3 manage.py migrate
