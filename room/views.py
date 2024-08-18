@@ -47,7 +47,7 @@ def search(request):
         print("Searching...")
         if request.POST.get('search'):
             search = request.POST['search']
-            rooms = Room.objects.filter(name__contains=search)
+            rooms = Room.objects.filter(name__icontains=search)
             return render(request,'search.html',{"rooms":rooms,"search":search})
         else:
             room_name = request.POST.get('room_name')
