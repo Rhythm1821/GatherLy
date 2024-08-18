@@ -44,6 +44,7 @@ from django.http import JsonResponse
 @login_required    
 def search(request):
     if request.method=='POST':
+        print("Searching...")
         if request.POST.get('search'):
             search = request.POST['search']
             rooms = Room.objects.filter(name__contains=search)

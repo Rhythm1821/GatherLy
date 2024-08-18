@@ -48,13 +48,23 @@
 <script>
     const roomId = JSON.parse(document.getElementById('json-roomid').textContent);
     const userName = JSON.parse(document.getElementById('json-username').textContent);
-    const chatSocket = new WebSocket(
+    {% comment %} const chatSocket = new WebSocket(
         'ws://'
         + window.location.host
         + '/ws/'
         + roomId
         + '/'
+    ); {% endcomment %}
+
+    const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+    const chatSocket = new WebSocket(
+        wsProtocol
+        + window.location.host
+        + '/ws/'
+        + roomId
+        + '/'
     );
+
     chatSocket.onclose = function(e) {
         console.log('onclose')
     }
