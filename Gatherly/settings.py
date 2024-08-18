@@ -40,6 +40,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Gatherly.urls'
 
+CSRF_TRUSTED_ORIGINS = ['https://gatherly-v4r2.onrender.com']
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
