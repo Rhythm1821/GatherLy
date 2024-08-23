@@ -50,6 +50,11 @@
                         <a href="{% url 'room:search' %}" class="btn btn-outline-light me-2">Search</a>
                         <a href="{% url 'logout' %}" class="btn btn-outline-light">Logout</a>
                     </div>
+                    {% else %}
+                    <div class="d-flex order-lg-2 ms-auto d-none d-lg-flex">
+                        <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Login</a>
+                        <a href="{% url 'register' %}" class="btn btn-outline-light">Register</a>
+                    </div>
                     {% endif %}
                 </div>
             </div>
