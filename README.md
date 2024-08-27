@@ -1,5 +1,7 @@
 # GatherLy
 
+## Project is Live -  [here](https://gatherly-v4r2.onrender.com)
+
 ## Description
 
 This is a real-time chat application built using Django and Django Channels. Users can create accounts, establish chat rooms, and communicate with other users in real-time. The application utilizes WebSocket functionality for seamless and instantaneous messaging.
