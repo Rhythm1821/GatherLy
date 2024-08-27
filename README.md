@@ -17,7 +17,8 @@ This is a real-time chat application built using Django and Django Channels. Use
 - **Django**: Backend web framework for building the application's structure and handling user authentication.
 - **Django Channels**: Handles WebSocket connections for real-time messaging.
 - **HTML/CSS/JavaScript**: Frontend technologies for building the user interface and interactivity.
-- **SQLite**: Database management system for storing user data and chat information.
+- **SQLite** (For local development): Database management system for storing user data and chat information.
+- **Supabase** (For deployment): Cloud-based database management system for storing user data and chat information.
 
 ## Installation
 
